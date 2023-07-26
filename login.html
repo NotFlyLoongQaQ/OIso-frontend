@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OIso登录</title>
+</head>
+<body>
+  <h1>OIso登录</h1>
+  <p>这只是一个demo 您可能需要修改来投入生产环境.</p>
+
+  <p>
+    <input type="checkbox" id="agreementCheckbox">
+    <label for="agreementCheckbox">同意授权我们在您的洛谷中新建一个剪贴板并删除的权限</label>
+  </p>
+
+  <button id="loginButton" disabled>使用OIso插件一键登录</button>
+
+  <script>
+    document.getElementById('agreementCheckbox').addEventListener('change', function() {
+      var loginButton = document.getElementById('loginButton');
+
+      if (this.checked) {
+        loginButton.disabled = false;
+      } else {
+        loginButton.disabled = true;
+      }
+    });
+
+    document.getElementById('loginButton').addEventListener('click', function() {
+      if (这里应该有一个flag 但是我不知道OIso启用的flag) {
+        alert('请先安装OIso++插件');
+        return;
+      }
+
+      // 在这里替换成怎么获取key 我没api先空这了（大雾
+      var key = should_key;
+
+      fetch('https://https://www.luogu.com.cn/paste/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          public: true,
+          data: 'thefly'
+        })
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        if (data.success) {
+          alert('登录成功！');
+        } else {
+          alert('登录失败，请重试！');
+        }
+      }).catch(function(error) {
+        console.error(error);
+        alert('登录失败，请重试！');
+      });
+    });
+  </script>
+</body>
+</html>
